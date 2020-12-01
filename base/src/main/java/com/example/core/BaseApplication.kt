@@ -6,11 +6,15 @@ import android.content.Context
 class BaseApplication:Application() {
 
     companion object{
-        private lateinit var currentApplication:Context
+        @JvmStatic
+        @get:JvmName("myApp")
+        lateinit var currentApplication:Context
+        private set
 
+        /*@JvmStatic
         fun currentApplication():Context{
             return currentApplication
-        }
+        }*/
     }
 
     override fun onCreate() {

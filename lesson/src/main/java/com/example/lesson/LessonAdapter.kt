@@ -32,15 +32,29 @@ class LessonAdapter : RecyclerView.Adapter<LessonViewHolder>() {
      * 静态内部类
      */
     class LessonViewHolder internal constructor(itemView: View) : BaseViewHolder(itemView) {
-       internal fun onBind(lesson: Lesson) {
-            var date = lesson.getDate()
-            if (date == null) {
-                date = "日期待定"
-            }
+        internal fun onBind(lesson: Lesson) {
+            var date = lesson.date ?: "日期待定"
+
             setText(R.id.tv_date, date)
-            setText(R.id.tv_content, lesson.getContent()!!)
-            val state = lesson.getState()
-            if (state != null) {
+            setText(R.id.tv_content, lesson.content!!)
+            val state = lesson.state
+            //let
+            lesson.state?.let {
+                setText(R.id.tv_state, it?.stateName()!!)
+                var colorRes = R.color.playback
+                colorRes = when (it) {
+                    Lesson.State.PLAYBACK -> {
+
+                        // 即使在 {} 中也是需要 break 的。
+                        R.color.playback
+                    }
+                    Lesson.State.LIVE -> R.color.live
+                    Lesson.State.WAIT -> R.color.wait
+                }
+                val backgroundColor = itemView.context.getColor(colorRes)
+                getView<View>(R.id.tv_state)?.setBackgroundColor(backgroundColor)
+            }
+           /* if (state != null) {
                 setText(R.id.tv_state, state.stateName()!!)
                 var colorRes = R.color.playback
                 colorRes = when (state) {
@@ -54,7 +68,7 @@ class LessonAdapter : RecyclerView.Adapter<LessonViewHolder>() {
                 }
                 val backgroundColor = itemView.context.getColor(colorRes)
                 getView<View>(R.id.tv_state)?.setBackgroundColor(backgroundColor)
-            }
+            }*/
         }
 
         companion object {

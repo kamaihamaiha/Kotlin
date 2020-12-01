@@ -1,8 +1,12 @@
 package com.example.app
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +26,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var et_password: EditText
     private lateinit var et_code: EditText
 
+    fun Activity.log(log:String){
+        Log.d("Activity", log)
+    }
+
+    fun Context.log(log:String){
+        Log.d("Context", log)
+    }
+
+    val ViewGroup.firstChildren:View
+        get() = getChildAt(0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+       // (window.decorView as ViewGroup).firstChildren
 
         et_username = findViewById(R.id.et_username)
         et_password = findViewById(R.id.et_password)

@@ -19,7 +19,7 @@ class LessonPresenter {
         this.activity = activity
     }
 
-    private var lessons: List<Lesson?> = ArrayList()
+    private var lessons: List<Lesson> = ArrayList()
 
     private val type = object : TypeToken<List<Lesson?>?>() {}.type
 
@@ -39,10 +39,23 @@ class LessonPresenter {
     fun showPlayback() {
         val playbackLessons = ArrayList<Lesson>()
         for (lesson in lessons) {
-            if (lesson?.getState() === Lesson.State.PLAYBACK) {
+            if (lesson.state === Lesson.State.PLAYBACK) {
                 playbackLessons.add(lesson)
             }
         }
         activity!!.showResult(playbackLessons)
+
+        /*//简化1
+        lessons.forEach {
+            if (it.state === Lesson.State.PLAYBACK) {
+                playbackLessons.add(it)
+            }
+        }
+        activity!!.showResult(playbackLessons)
+
+        //简化2
+        val filter = lessons.filter { it.state === Lesson.State.PLAYBACK }
+        activity!!.showResult(filter)*/
+
     }
 }

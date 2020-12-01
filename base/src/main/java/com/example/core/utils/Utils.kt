@@ -8,18 +8,23 @@ import com.example.core.BaseApplication
 
 private val displayMetrics: DisplayMetrics = Resources.getSystem().displayMetrics
 
+
+/*fun dp2px(dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
+}*/
+
+fun Float.dp2px(): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, displayMetrics)
+}
+
+/* fun toast(msg: String) {
+     toast(msg, Toast.LENGTH_SHORT)
+ }*/
+
 object Utils {
-
-    fun dp2px(dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
-    }
-
-    fun toast(msg: String) {
-        toast(msg, Toast.LENGTH_SHORT)
-    }
-
-    fun toast(msg: String, duration: Int) {
-        Toast.makeText(BaseApplication.currentApplication(), msg, duration)
+    @JvmOverloads
+    fun toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(BaseApplication.currentApplication, msg, duration)
     }
 
 

@@ -10,11 +10,17 @@ import android.view.Gravity
 import androidx.appcompat.widget.AppCompatEditText
 import com.example.app.R
 import com.example.core.utils.Utils
+import com.example.core.utils.dp2px
 import kotlin.random.Random
 
-class CodeView:AppCompatEditText {
+class CodeView @JvmOverloads constructor(context: Context, attrs:AttributeSet? = null) :AppCompatEditText(context,attrs)  {
 
-    var paint:Paint = Paint()
+    var paint:Paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
+    }
     var codeList = arrayOf(
             "kotlin",
             "android",
@@ -25,21 +31,18 @@ class CodeView:AppCompatEditText {
             "retrofit",
             "tcp/ip"
     )
-    constructor(context:Context):this(context,null)
+    //constructor(context:Context):this(context,null)
 
-    constructor(context: Context,attrs:AttributeSet?):super(context,attrs){
+    init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
 
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getContext().getColor(R.color.colorAccent)
-        paint.strokeWidth = Utils.dp2px(6f)
-
         updateCode()
     }
+
+
 
     fun updateCode(){
         val random:Int = Random.nextInt(codeList.size)

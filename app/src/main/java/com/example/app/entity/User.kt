@@ -1,19 +1,7 @@
 package com.example.app.entity
 
-class User {
-    var username: String? = null
-    var password: String? = null
-    var code: String? = null
+data class User constructor(var username: String?,var password: String?,var code: String?)  {
 
-    set(value) {field = value}
+    constructor(): this(null,null,null)
 
-    get() {return field}
-
-    constructor()
-
-    constructor(username:String,password:String,code:String){
-        this.username = username
-        this.password = password
-        this.code = code
-    }
 }
