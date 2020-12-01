@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     val usernameKey: String = "username"
     val passwordKey: String = "password"
 
+
     private lateinit var et_username: EditText
     private lateinit var et_password: EditText
     private lateinit var et_code: EditText
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_login.setOnClickListener(this)
         img_code.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
